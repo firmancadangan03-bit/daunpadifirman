@@ -43,3 +43,8 @@ BATCH_SIZE = 32
 EPOCHS = 5
 SEED = 123
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+
+
+# Target akurasi penelitian/aplikasi.
+# Ini bukan hasil evaluasi aktual model. Hasil aktual tetap dibaca dari models/model_info.json.
+TARGET_ACCURACY = 0.98

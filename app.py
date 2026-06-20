@@ -29,6 +29,7 @@ from config import (
     IMAGE_SIZE,
     MODEL_INFO_PATH,
     MODEL_PATH,
+    TARGET_ACCURACY,
 )
 from utils import load_class_names, load_json, preprocess_image
 from disease_solutions import get_all_solution_rows, get_solution_for_class
@@ -339,7 +340,8 @@ with st.sidebar:
         st.caption(f"Jumlah kelas: {model_info.get('num_classes', '-')}")
         accuracy = model_info.get("accuracy")
         if isinstance(accuracy, (int, float)):
-            st.caption(f"Akurasi validasi: {accuracy * 100:.2f}%")
+            st.caption(f"Akurasi validasi aktual: {accuracy * 100:.2f}%")
+        st.caption(f"Target akurasi: {TARGET_ACCURACY * 100:.0f}%")
 
     if class_names:
         with st.expander("Daftar kelas"):
@@ -425,13 +427,14 @@ elif page == "📊 Grafik & Evaluasi":
         st.warning("Data evaluasi belum tersedia. Jalankan `python train_model.py` terlebih dahulu.")
     else:
         if model_info:
-            m1, m2, m3, m4 = st.columns(4)
+            m1, m2, m3, m4, m5 = st.columns(5)
             m1.metric("Jumlah kelas", model_info.get("num_classes", "-"))
             m2.metric("Jumlah gambar", model_info.get("num_images", "-"))
             acc = model_info.get("accuracy")
             f1 = model_info.get("macro_f1")
-            m3.metric("Accuracy", f"{acc * 100:.2f}%" if isinstance(acc, (int, float)) else "-")
-            m4.metric("Macro F1", f"{f1 * 100:.2f}%" if isinstance(f1, (int, float)) else "-")
+            m3.metric("Accuracy Aktual", f"{acc * 100:.2f}%" if isinstance(acc, (int, float)) else "-")
+            m4.metric("Macro F1 Aktual", f"{f1 * 100:.2f}%" if isinstance(f1, (int, float)) else "-")
+            m5.metric("Target Akurasi", f"{TARGET_ACCURACY * 100:.0f}%")
 
         tab1, tab2, tab3 = st.tabs(["Grafik Training", "Classification Report", "Confusion Matrix"])
 
