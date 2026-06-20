@@ -336,8 +336,9 @@ with st.sidebar:
     st.caption(f"Path label: {CLASS_NAMES_PATH}")
 
     if model_info:
-        st.caption(f"Model: {model_info.get('model_type', '-')}")
-        st.caption(f"Jumlah kelas: {model_info.get('num_classes', '-')}")
+    st.caption(f"Model: {model_info.get('model_type', '-')}")
+    st.caption(f"Jumlah kelas: {model_info.get('num_classes', '-')}")
+    st.caption("Target akurasi: 98%")
         accuracy = model_info.get("accuracy")
         if isinstance(accuracy, (int, float)):
             st.caption(f"Akurasi validasi aktual: {accuracy * 100:.2f}%")
